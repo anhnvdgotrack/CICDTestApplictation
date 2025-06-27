@@ -20,3 +20,7 @@ jobs:
   build_test:
     needs: [setup_java]
     uses: ./.github/workflows/build_test_apk.yaml
+  
+  distribution:
+    needs: [build_test]
+    uses: ./.github/workflows/distribution_test_apk.yaml

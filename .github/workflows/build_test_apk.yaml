@@ -3,7 +3,6 @@ name: build
 on:
   workflow_call:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,7 +10,9 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v4
-        
+
       - name: build debug
         run: |
           ./gradlew assembleDebug
+
+      
