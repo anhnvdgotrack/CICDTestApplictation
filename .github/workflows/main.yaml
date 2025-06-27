@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: setup java
-        uses: anhnvdgotrack/CICDTestApplictation/.github/workflows/setup/setup_java.yaml
+        uses: anhnvdgotrack/CICDTestApplictation/.github/workflows/setup/setup_java.yaml@anhnvd
