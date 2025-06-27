@@ -6,12 +6,12 @@ on:
 
 
 jobs:
-  setup_java:
+  check_out:
     runs-on: ubuntu-latest
 
     steps:
       - name: checkout 
         uses: actions/checkout@v4
 
-      - name: setup java
-        uses: anhnvdgotrack/CICDTestApplictation/.github/workflows/setup/setup_java.yaml@anhnvd
+  setup_java:
+    uses: anhnvdgotrack/CICDTestApplictation/.github/workflows/setup/setup_java.yaml@anhnvd
