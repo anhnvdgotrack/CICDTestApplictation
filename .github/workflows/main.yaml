@@ -15,4 +15,5 @@ jobs:
 
   setup_java:
     needs: [check_out]
-    uses: anhnvdgotrack/CICDTestApplictation/.github/workflows/setup/setup_java.yaml@anhnvd
+    
+    uses: ./.github/workflows/setup_java.yaml@anhnvd
