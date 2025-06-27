@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "313936629859",
+    "project_id": "abcaa-f9c1f",
+    "storage_bucket": "abcaa-f9c1f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313936629859:android:62cacb0144f1e19a59e856",
+        "android_client_info": {
+          "package_name": "com.gotrack.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrqtn-1ruFJhA3oKie-37YmrL5l-yWzuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313936629859:android:4e9669d59ee1099459e856",
+        "android_client_info": {
+          "package_name": "com.test.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrqtn-1ruFJhA3oKie-37YmrL5l-yWzuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
