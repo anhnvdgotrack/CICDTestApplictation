@@ -14,5 +14,5 @@ jobs:
         uses: ./.github/workflows/setup/setup_java.yaml
 
       - name: checkout 
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
         
