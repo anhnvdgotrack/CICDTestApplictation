@@ -5,21 +5,14 @@ on:
     branches: [anhnvd]
 
 jobs:
-  say-something:
+  setup_java:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say something
-        run: |
-          touch a.txt
-          echo "message in a.txt" >> a.txt
-          cat a.txt
-      
-      - name: Check if a.txt exists
-        run: |
-          ls -la | grep a || echo "a.txt is not found"
 
-      - name: Remove if exists
-        run: |
-          rm -f a.txt
-          ls -la | grep a || echo "a.txt is not found or deleted"
+      - name: setup java
+        uses: ./.github/workflows/setup/setup_java.yaml
+
+      - name: checkout 
+        uses: action/checkout@v4
+        

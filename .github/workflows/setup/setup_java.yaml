@@ -1,0 +1,19 @@
+name: setup java
+
+on: 
+  workflow_call:
+
+jobs:
+  say-something:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: setup java env with java17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "oracle"
+          java-version: "17"
+      - name: print java version
+        run: |
+          java -version
