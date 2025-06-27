@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
       - name: build debug
         run: |
           ./gradlew assembleDebug
