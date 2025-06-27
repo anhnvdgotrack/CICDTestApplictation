@@ -9,10 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: checkout 
+        uses: actions/checkout@v4
 
       - name: setup java
         uses: ./.github/workflows/setup/setup_java.yaml
-
-      - name: checkout 
-        uses: actions/checkout@v4
-        
