@@ -1,0 +1,13 @@
+name: build
+
+on:
+  workflow_call:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build debug
+        run: |
+          ./grawdlew assemblerDebug
