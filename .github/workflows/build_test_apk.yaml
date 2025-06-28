@@ -15,4 +15,11 @@ jobs:
         run: |
           ./gradlew assembleDebug
 
+  check_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check file
+        run: |
+          ls app/build/outputs/apk/debug
+
       
