@@ -3,7 +3,7 @@ name: Distribution test version apk
 on:
   workflow_call:
     secrets:
-      FIREBASE_CREDENTIALS:
+      CREDENTIAL_FILE_CONTENT:
         required: true
       FIREBASE_APP_ID:
         required: true
