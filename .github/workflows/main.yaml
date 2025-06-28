@@ -24,3 +24,6 @@ jobs:
   distribution:
     needs: [build_test]
     uses: ./.github/workflows/distribution_test_apk.yaml
+    secrets:
+      FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}

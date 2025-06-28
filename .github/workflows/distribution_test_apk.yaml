@@ -2,6 +2,11 @@ name: Distribution test version apk
 
 on:
   workflow_call:
+    secrets:
+      FIREBASE_CREDENTIALS:
+        required: true
+      FIREBASE_APP_ID:
+        required: true
 
 jobs:
   distribution:
@@ -10,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Debug secret presence
+      - name: Debug secret FIREBASE_CREDENTIALS
         run: |
           if [ -z "$SECRET" ]; then
             echo "❌ SECRET is empty"
@@ -20,11 +25,15 @@ jobs:
         env:
           SECRET: ${{ secrets.FIREBASE_CREDENTIALS }}
 
-      - name: Print part of secret (use with caution)
+      - name: Debug secret FIREBASE_APP_ID
         run: |
-          echo "First 10 chars: ${SECRET:0:10}******"
+          if [ -z "$SECRET" ]; then
+            echo "❌ SECRET is empty"
+          else
+            echo "✅ SECRET is set"
+          fi
         env:
-          SECRET: ${{ secrets.FIREBASE_CREDENTIALS }}
+          SECRET: ${{ secrets.FIREBASE_APP_ID }}
 
       - name: Upload APK to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
