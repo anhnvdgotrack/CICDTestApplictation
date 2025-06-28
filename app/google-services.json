@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:313936629859:android:62cacb0144f1e19a59e856",
+        "mobilesdk_app_id": "1:313936629859:android:de25f3e127e0e3c859e856",
         "android_client_info": {
-          "package_name": "com.gotrack.test"
+          "package_name": "com.example.cicdtestapplication"
         }
       },
       "oauth_client": [],
