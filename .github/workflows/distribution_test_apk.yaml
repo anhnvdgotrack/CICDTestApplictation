@@ -10,9 +10,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check secret exists
+      - name: Debug secret presence
         run: |
-          echo "Secret length: ${#SECRET}"
+          if [ -z "$SECRET" ]; then
+            echo "❌ SECRET is empty"
+          else
+            echo "✅ SECRET is set"
+          fi
         env:
           SECRET: ${{ secrets.FIREBASE_CREDENTIALS }}
 
