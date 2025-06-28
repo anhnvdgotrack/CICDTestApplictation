@@ -12,18 +12,26 @@ jobs:
   distribution:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
       - name: Debug secret FIREBASE_CREDENTIALS
         run: |
-          echo $SECRET
+          if [ -z "$SECRET" ]; then
+            echo "❌ FIREBASE_CREDENTIALS is empty"
+          else
+            echo "✅ FIREBASE_CREDENTIALS is set"
+            echo "Length: ${#SECRET}"
+          fi
         env:
           SECRET: ${{ secrets.FIREBASE_CREDENTIALS }}
 
       - name: Debug secret FIREBASE_APP_ID
         run: |
-          echo $SECRET
+          if [ -z "$SECRET" ]; then
+            echo "❌ FIREBASE_APP_ID is empty"
+          else
+            echo "✅ FIREBASE_APP_ID is set"
+            echo "Length: ${#SECRET}"
+          fi
         env:
           SECRET: ${{ secrets.FIREBASE_APP_ID }}
 
@@ -35,4 +43,3 @@ jobs:
           groups: testers
           file: app/build/outputs/apk/debug/app-debug.apk
           debug: true
-        
