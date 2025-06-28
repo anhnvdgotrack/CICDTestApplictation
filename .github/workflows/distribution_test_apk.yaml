@@ -17,21 +17,13 @@ jobs:
 
       - name: Debug secret FIREBASE_CREDENTIALS
         run: |
-          if [ -z "$SECRET" ]; then
-            echo "❌ SECRET is empty"
-          else
-            echo "✅ SECRET is set"
-          fi
+          echo $SECRET
         env:
           SECRET: ${{ secrets.FIREBASE_CREDENTIALS }}
 
       - name: Debug secret FIREBASE_APP_ID
         run: |
-          if [ -z "$SECRET" ]; then
-            echo "❌ SECRET is empty"
-          else
-            echo "✅ SECRET is set"
-          fi
+          echo $SECRET
         env:
           SECRET: ${{ secrets.FIREBASE_APP_ID }}
 
