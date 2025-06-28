@@ -14,12 +14,12 @@ jobs:
       - name: build debug
         run: |
           ./gradlew assembleDebug
-
-  check_build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check file
-        run: |
           ls app/build/outputs/apk/debug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
 
       

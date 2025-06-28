@@ -12,6 +12,10 @@ jobs:
   distribution:
     runs-on: ubuntu-latest
     steps:
+      - name: Download APK artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: debug-apk
       - name: Upload APK to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
