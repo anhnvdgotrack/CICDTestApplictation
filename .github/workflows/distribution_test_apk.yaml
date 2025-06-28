@@ -10,6 +10,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check secret exists
+        run: |
+          echo "Secret length: ${#SECRET}"
+        env:
+          SECRET: ${{ secrets.FIREBASE_CREDENTIALS }}
+
+      - name: Print part of secret (use with caution)
+        run: |
+          echo "First 10 chars: ${SECRET:0:10}******"
+        env:
+          SECRET: ${{ secrets.FIREBASE_CREDENTIALS }}
+
       - name: Upload APK to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
