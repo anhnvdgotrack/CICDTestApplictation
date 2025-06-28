@@ -12,29 +12,6 @@ jobs:
   distribution:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Debug secret FIREBASE_CREDENTIALS
-        run: |
-          if [ -z "$SECRET" ]; then
-            echo "❌ FIREBASE_CREDENTIALS is empty"
-          else
-            echo "✅ FIREBASE_CREDENTIALS is set"
-            echo "Length: ${#SECRET}"
-          fi
-        env:
-          SECRET: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-
-      - name: Debug secret FIREBASE_APP_ID
-        run: |
-          if [ -z "$SECRET" ]; then
-            echo "❌ FIREBASE_APP_ID is empty"
-          else
-            echo "✅ FIREBASE_APP_ID is set"
-            echo "Length: ${#SECRET}"
-          fi
-        env:
-          SECRET: ${{ secrets.FIREBASE_APP_ID }}
-
       - name: Upload APK to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
