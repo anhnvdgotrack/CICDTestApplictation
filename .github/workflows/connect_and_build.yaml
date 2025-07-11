@@ -23,8 +23,17 @@ jobs:
       - name: SSH to builder and build APK
         run: |
           mkdir -p ~/.ssh
+          echo "setup SSH private key"
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "setup SSH private key OK"
+          echo "Setting permissions for SSH private key"
           chmod 600 ~/.ssh/id_rsa
+          echo "Setting permissions for SSH private key OK"
+          echo "Start connecting to the host"
+
+          echo "Host: ${{ inputs.HOST }}"
+          echo "Username: ${{ inputs.USERNAME }}"
+          echo "Adding host to known_hosts"
           ssh-keyscan -H ${{ inputs.HOST }} >> ~/.ssh/known_hosts
 
           ssh -o StrictHostKeyChecking=no \
@@ -35,6 +44,7 @@ jobs:
               echo 'Connected successfully!'; \
               cd workspace/CICDTestApplication; \
               ./gradlew assembleAndroidTest"
+          echo "Build APK completed successfully!"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
