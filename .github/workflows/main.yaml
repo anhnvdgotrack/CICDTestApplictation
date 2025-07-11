@@ -2,7 +2,7 @@ name: Main github action
 
 on: 
   push:
-    branches: [CNTT-3713_CI_CD_Demo] # anhnvd,
+    branches: [anhnvd] # anhnvd,
 
 jobs:
   check_out:
