@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../CI_CD_Test"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

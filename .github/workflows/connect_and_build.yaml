@@ -1,0 +1,44 @@
+name: connect_and_build
+
+on:
+  workflow_call:
+    inputs:
+      USERNAME:
+        description: 'Username for SSH connection'
+        required: true
+        type: string
+      HOST:
+        description: 'Hostname for SSH connection'
+        required: true
+        type: string
+
+    secrets:
+      SSH_PRIVATE_KEY:
+        required: true
+
+jobs:
+  connect_and_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to builder and build APK
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ inputs.HOST }} >> ~/.ssh/known_hosts
+
+          ssh -o StrictHostKeyChecking=no \
+              -i ~/.ssh/id_rsa \
+              ${{ inputs.USERNAME }}@${{ inputs.HOST }} \
+              "set -e; \
+              ls -la; \
+              echo 'Connected successfully!'; \
+              cd workspace/CICDTestApplication; \
+              ./gradlew assembleAndroidTest"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Download APK artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: debug-apk

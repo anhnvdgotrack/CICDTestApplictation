@@ -5,21 +5,59 @@ on:
 
 jobs:
   build:
+    timeout-minutes: 90
     runs-on: ubuntu-latest
     steps:
+      - name: Cleanup pre-installed toolsAdd
+        run: |
+          # This is a fix for https://github.com/actions/virtual-environments/issues/1918
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost" 
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: build debug
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Regenerate gradle-wrapper.jar
         run: |
-          ./gradlew assembleDebug
-          ls app/build/outputs/apk/debug
+          chmod +x ./gradlew
+          ./gradlew wrapper
+
+      - name: Clean project
+        run: ./gradlew clean
+
+      - name: Build debug
+        id: build_debug
+        run: |
+          
+          # Start keep-alive logger
+          (while true; do echo "::notice::Still building..."; sleep 300; done) & keep_alive=$!
+          
+          (cd .github/runable/buildLogic && ./buildApk.sh $(< ../buildData/buildArgs.txt))
+          
+          if [ $? -eq 0 ]; then
+            echo "apk_path=$(< .github/runable/buildData/filePath.txt)" >> "$GITHUB_OUTPUT"
+            echo "is_success=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_success=0" >> "$GITHUB_OUTPUT"
+          fi
+          
+          kill $keep_alive
 
       - name: Upload APK artifact
+        if: success() && steps.build_debug.outputs.is_success == '1'
         uses: actions/upload-artifact@v4
         with:
           name: debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: ${{ steps.build_debug.outputs.apk_path }}
 
-      
+      - name: Upload Gradle problems report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-problems-report
+          path: GoTrack.Android.Gps/build/reports/problems/problems-report.html

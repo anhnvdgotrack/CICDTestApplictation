@@ -1,0 +1,16 @@
+- name: SSH & build app
+  run: |
+    ssh -o StrictHostKeyChecking=no user@your-server << 'EOF'
+      cd /path/to/project
+      ./gradlew assembleRelease
+    EOF
+
+- name: Copy APK from remote
+  run: |
+    scp user@your-server:/path/to/project/app/build/outputs/apk/release/app-release.apk .
+
+- name: Upload artifact
+  uses: actions/upload-artifact@v4
+  with:
+    name: release-apk
+    path: app-release.apk
