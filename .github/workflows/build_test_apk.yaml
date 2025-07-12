@@ -30,6 +30,8 @@ jobs:
       - name: Clean project and build
         id: build_debug
         run: |
+          export ANDROID_HOME=$HOME/Library/Android/sdk
+          export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH
           ls -la
           echo "=== Bắt đầu build APK"
           echo "ANDROID_HOME: $ANDROID_HOME"
