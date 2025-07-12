@@ -38,6 +38,8 @@ jobs:
           else
             echo "is_success=0" >> "$GITHUB_OUTPUT"
           fi
+        env:
+          ANDROID_HOME: $HOME/Library/Android/sdk
 
       - name: Upload APK artifact
         if: success() && steps.build_debug.outputs.is_success == '1'
