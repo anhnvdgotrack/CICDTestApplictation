@@ -10,7 +10,7 @@ on:
 
 jobs:
   distribution:
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: ubuntu-latest
     steps:
       - name: Download APK artifact
         uses: actions/download-artifact@v4
