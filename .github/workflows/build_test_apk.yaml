@@ -27,19 +27,17 @@ jobs:
           chmod +x ./gradlew
           ./gradlew wrapper
 
-      - name: Clean project
-        run: ./gradlew clean
-
-      - name: Build debug
+      - name: Clean project and build
         id: build_debug
         run: |
-          
-          # Start keep-alive logger
-          (while true; do echo "::notice::Still building..."; sleep 300; done) & keep_alive=$!
-          
-          ./gradlew assembleAndroidTest
-          
-          kill $keep_alive
+          ./gradlew clean
+          ./gradlew assembleDebug
+          if [ $? -eq 0 ]; then
+            echo "apk_path=app/build/outputs/apk/debug/app-debug.apk" >> "$GITHUB_OUTPUT"
+            echo "is_success=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_success=0" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Upload APK artifact
         if: success() && steps.build_debug.outputs.is_success == '1'
