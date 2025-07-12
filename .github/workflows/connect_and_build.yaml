@@ -18,7 +18,7 @@ on:
 
 jobs:
   connect_and_build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64]
 
     steps:
       - name: Setup SSH and build APK remotely

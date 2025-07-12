@@ -6,7 +6,7 @@ on:
 
 jobs:
   check_out:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64]
     steps:
       - name: checkout 
         uses: actions/checkout@v4
