@@ -15,19 +15,19 @@ jobs:
     needs: [check_out]
     uses: ./.github/workflows/setup_java.yaml
 
-  connect_and_build:
-    needs: [setup_java]
-    uses: ./.github/workflows/connect_and_build.yaml
-    with:
-      USERNAME: ${{ vars.USERNAME }}
-      HOST: ${{ vars.HOST }}
-    secrets: inherit
-
-  # build_test:
+  # connect_and_build:
   #   needs: [setup_java]
-  #   uses: ./.github/workflows/build_test_apk.yaml
-  
-  # distribution:
-  #   needs: [build_test]
-  #   uses: ./.github/workflows/distribution_test_apk.yaml
+  #   uses: ./.github/workflows/connect_and_build.yaml
+  #   with:
+  #     USERNAME: ${{ vars.USERNAME }}
+  #     HOST: ${{ vars.HOST }}
   #   secrets: inherit
+
+  build_test:
+    needs: [setup_java]
+    uses: ./.github/workflows/build_test_apk.yaml
+  
+  distribution:
+    needs: [build_test]
+    uses: ./.github/workflows/distribution_test_apk.yaml
+    secrets: inherit
