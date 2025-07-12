@@ -8,13 +8,13 @@ jobs:
     timeout-minutes: 90
     runs-on: [self-hosted, macOS, ARM64]
     steps:
-      - name: Cleanup pre-installed toolsAdd
-        run: |
-          # This is a fix for https://github.com/actions/virtual-environments/issues/1918
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost" 
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+      # - name: Cleanup pre-installed toolsAdd
+      #   run: |
+      #     # This is a fix for https://github.com/actions/virtual-environments/issues/1918
+      #     sudo rm -rf /usr/share/dotnet
+      #     sudo rm -rf /opt/ghc
+      #     sudo rm -rf "/usr/local/share/boost" 
+      #     sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -37,14 +37,7 @@ jobs:
           # Start keep-alive logger
           (while true; do echo "::notice::Still building..."; sleep 300; done) & keep_alive=$!
           
-          (cd .github/runable/buildLogic && ./buildApk.sh $(< ../buildData/buildArgs.txt))
-          
-          if [ $? -eq 0 ]; then
-            echo "apk_path=$(< .github/runable/buildData/filePath.txt)" >> "$GITHUB_OUTPUT"
-            echo "is_success=1" >> "$GITHUB_OUTPUT"
-          else
-            echo "is_success=0" >> "$GITHUB_OUTPUT"
-          fi
+          ./gradlew assembleAndroidTest
           
           kill $keep_alive
 
