@@ -11,9 +11,9 @@ jobs:
       - name: checkout 
         uses: actions/checkout@v4
 
-  setup_java:
-    needs: [check_out]
-    uses: ./.github/workflows/setup_java.yaml
+  # setup_java:
+  #   needs: [check_out]
+  #   uses: ./.github/workflows/setup_java.yaml
 
   # connect_and_build:
   #   needs: [setup_java]
@@ -24,7 +24,7 @@ jobs:
   #   secrets: inherit
 
   build_test:
-    needs: [setup_java]
+    needs: [check_out]
     uses: ./.github/workflows/build_test_apk.yaml
   
   distribution:
