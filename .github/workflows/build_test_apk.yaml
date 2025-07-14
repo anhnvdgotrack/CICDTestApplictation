@@ -33,12 +33,8 @@ jobs:
           export ANDROID_HOME=$HOME/Library/Android/sdk
           export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH
           ls -la
-          echo "=== Bắt đầu build APK"
           echo "ANDROID_HOME: $ANDROID_HOME"
-          echo "=== Chạy lệnh Gradle"
-          echo "=== Xoá thư mục build"
           ./gradlew clean
-          echo "=== Thực thi lệnh assembleDebug"
           ./gradlew assembleDebug
           if [ $? -eq 0 ]; then
             echo "apk_path=app/build/outputs/apk/debug/app-debug.apk" >> "$GITHUB_OUTPUT"

@@ -4,6 +4,9 @@ on:
   push:
     branches: [anhnvd] # anhnvd,
 
+run-name: "Deployed by @${{ github.actor }} on ${{ github.ref_name }}"
+
+
 jobs:
   check_out:
     runs-on: [self-hosted, macOS, ARM64]

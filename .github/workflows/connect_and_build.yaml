@@ -39,7 +39,7 @@ jobs:
             echo \">>> Đã kết nối SSH\"
             cd workspace/CICDTestApplication || (echo \" Không tìm thấy thư mục\" && exit 1)
             ./gradlew assembleAndroidTest || (echo \" Build thất bại\" && exit 1)
-            echo \"✅ Build thành công\"
+            echo \" Build thành công\"
           '"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
